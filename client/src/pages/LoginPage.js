@@ -5,17 +5,19 @@ import {UserContext} from "../UserContext";
 export default function LoginPage() {
   const [username,setUsername] = useState('');
   const [password,setPassword] = useState('');
-  const [redirect,setRedirect] = useState(false);
+  const [redirect,setRedirect] = useState(false);  //Put redirect in State
   const {setUserInfo} = useContext(UserContext);
+
   async function login(ev) {
     ev.preventDefault();
     const response = await fetch('http://localhost:4000/login', {
       method: 'POST',
       body: JSON.stringify({username, password}),
       headers: {'Content-Type':'application/json'},
+      //Any cookies that might exist considered as credentials, included to browser response headers for subsequent requests
       credentials: 'include',
     });
-    if (response.ok) {
+    if (response.ok) {  //If login successful, set the user Content from the user info from the json response, then redirect to homepage of blog
       response.json().then(userInfo => {
         setUserInfo(userInfo);
         setRedirect(true);

@@ -4,7 +4,7 @@ import {UserContext} from "./UserContext";
 
 export default function Header() {
   const {setUserInfo,userInfo} = useContext(UserContext);
-  useEffect(() => {
+  useEffect(() => {  //Will run every time header component is mounted
     fetch('http://localhost:4000/profile', {
       credentials: 'include',
     }).then(response => {
@@ -14,7 +14,7 @@ export default function Header() {
     });
   }, []);
 
-  function logout() {
+  function logout() {  //Invalidiate the cookie on backend 
     fetch('http://localhost:4000/logout', {
       credentials: 'include',
       method: 'POST',
@@ -22,7 +22,7 @@ export default function Header() {
     setUserInfo(null);
   }
 
-  const username = userInfo?.username;
+  const username = userInfo?.username; //Store username iff validated login
 
   return (
     <header>

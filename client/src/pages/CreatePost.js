@@ -10,19 +10,22 @@ export default function CreatePost() {
   const [content,setContent] = useState('');
   const [files, setFiles] = useState('');
   const [redirect, setRedirect] = useState(false);
+  
+  
   async function createNewPost(ev) {
-    const data = new FormData();
+    const data = new FormData(); //Send information as FormData, JSON cannot send file
     data.set('title', title);
     data.set('summary', summary);
     data.set('content', content);
     data.set('file', files[0]);
     ev.preventDefault();
+
     const response = await fetch('http://localhost:4000/post', {
       method: 'POST',
-      body: data,
-      credentials: 'include',
+      body: data, //Send Formdata data obj
+      credentials: 'include',  //Send Cookie, for userInfo for author
     });
-    if (response.ok) {
+    if (response.ok) { //If new Post was created, redirect to '/'
       setRedirect(true);
     }
   }

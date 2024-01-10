@@ -12,8 +12,8 @@ export default function EditPost() {
 
   useEffect(() => {
     fetch('http://localhost:4000/post/'+id)
-      .then(response => {
-        response.json().then(postInfo => {
+      .then(response => { 
+        response.json().then(postInfo => {  //From postInfo we get returned in the json response, fill in the post info
           setTitle(postInfo.title);
           setContent(postInfo.content);
           setSummary(postInfo.summary);
@@ -21,7 +21,7 @@ export default function EditPost() {
       });
   }, []);
 
-  async function updatePost(ev) {
+  async function updatePost(ev) { //Grab info from state, create FormData then fetch put request to /post, with updated info
     ev.preventDefault();
     const data = new FormData();
     data.set('title', title);

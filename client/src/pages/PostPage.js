@@ -17,6 +17,7 @@ export default function PostPage() {
       });
   }, []);
 
+  //If no post found then return nothing 
   if (!postInfo) return '';
 
   return (

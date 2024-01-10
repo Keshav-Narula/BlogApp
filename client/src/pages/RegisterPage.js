@@ -1,10 +1,12 @@
 import {useState} from "react";
 
 export default function RegisterPage() {
+  //Fix Inputs so values stored inside State
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  
   async function register(ev) {
-    ev.preventDefault();
+    ev.preventDefault(); //Dont redirect from the page, prevent default behaviour of the browser
     const response = await fetch('http://localhost:4000/register', {
       method: 'POST',
       body: JSON.stringify({username,password}),
